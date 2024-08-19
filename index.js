@@ -44,12 +44,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}`);
-});
-
-client.on('guildMemberUpdate', async (oldMember, newMember) => {
-    console.log(oldMember.nickname, newMember.nickname)
+function checkAndSetNickname(member) {
     let nicksData;
     try {
         nicksData = JSON.parse(fs.readFileSync(nicksFilePath, 'utf8'));
@@ -57,14 +52,26 @@ client.on('guildMemberUpdate', async (oldMember, newMember) => {
         console.error(`Error reading nicks file: ${error}`);
         return;
     }
-    const newNickname = nicksData[newMember.user.id];
+    const newNickname = nicksData[member.user.id];
     if (newNickname) {
-        if (newMember.nickname !== newNickname) {
-            await newMember.setNickname(newNickname)
+        if (member.nickname !== newNickname) {
+            member.setNickname(newNickname)
             .then(console.log(`Successfully changed nickname to ${newNickname}`))
-            .catch(console.log(`Failed to change nickname to ${newNickname}`))
+            .catch()
         }
     }
+}
+
+client.once('ready', () => {
+    console.log(`Logged in as ${client.user.tag}`);
+    client.guilds.cache.get(guildId).members.cache.forEach(async member => {
+        checkAndSetNickname(member)
+    })
+});
+
+client.on('guildMemberUpdate', async (oldMember, newMember) => {
+    console.log(oldMember.nickname, newMember.nickname)
+    checkAndSetNickname(newMember)
 })
 
 client.login(token)
