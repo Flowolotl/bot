@@ -11,5 +11,10 @@
   "description": "",
   "dependencies": {
     "discord.js": "^14.15.3"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
   }
 }
