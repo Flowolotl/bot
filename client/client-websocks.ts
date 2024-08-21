@@ -19,6 +19,9 @@ const commandImpls = {
         // @ts-ignore
         readline.clearScreenDown(process.stdout);
     },
+    "say": (...args) => {
+        ws.send(`say ${args.join(" ")}`);
+    },
     "help": () => {
         console.log(commands);
     },

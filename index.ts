@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits } from 'discord.js'
 import WebSocket from 'ws'
-import { token, guildId, port } from './config.json'
+import { token, guildId, port, peter } from './config.json'
 import { HandleCommands } from './command-handler'
 import { checkAndSetNickname } from './nickname'
 import MessageInterface from './class/MessageInterface'
@@ -31,6 +31,16 @@ client.on('guildMemberUpdate', async (oldMember, newMember) => {
     checkAndSetNickname(newMember)
 })
 
+let clientCommands = {
+    "say": () => {
+        return {
+            iExecute: (client, ...args) => {
+                client.channels.cache.get(peter).send(args.join(" "))
+            }
+        }
+    }
+}
+
 wss.on('connection', ws => {
     Messager.__ws(ws)
     ws.on('message', async data => {
@@ -39,6 +49,9 @@ wss.on('connection', ws => {
         let command = payload[0]
         if (command in requiredCommands) {
             requiredCommands[command].iExecute(client, ...payload.slice(1))
+        } else if (command in clientCommands) {
+            // clientCommands[command].iExecute(client, ...payload.slice(1))
+            clientCommands[command]().iExecute(client, ...payload.slice(1))
         }
     });
     ws.on('close', () => {
