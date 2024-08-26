@@ -10,7 +10,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "discord.js": "^14.15.3"
+    "@discordjs/voice": "^0.17.0",
+    "discord.js": "^14.15.3",
+    "libsodium-wrappers": "^0.7.15",
+    "openai": "^4.56.0"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",

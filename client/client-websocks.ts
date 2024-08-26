@@ -22,6 +22,9 @@ const commandImpls = {
     "say": (...args) => {
         ws.send(`say ${args.join(" ")}`);
     },
+    "join": () => {
+        ws.send(`join`);
+    },
     "help": () => {
         console.log(commands);
     },
