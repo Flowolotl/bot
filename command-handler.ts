@@ -1,8 +1,8 @@
-import { Collection, Events } from 'discord.js'
+import { Client, Collection, Events } from 'discord.js'
 import fs from 'node:fs'
 import path from 'node:path'
 
-export async function HandleCommands(client) : Promise<any> {
+export async function HandleCommands(client: Client) : Promise<any> {
     client.commands = new Collection()
 
     const foldersPath = path.join(__dirname, 'commands')
