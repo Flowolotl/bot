@@ -1,6 +1,6 @@
 import { REST, Routes } from 'discord.js';
-import { clientId, guildId, token } from './config.json';
-import fs from 'node:fs';
+import { clientId, token } from './src/assets/config.json'
+import fs from 'node:fs'
 import path from 'node:path';
 
 const commands = [];
@@ -25,7 +25,7 @@ const rest = new REST().setToken(token);
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
 		const data = await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
+			Routes.applicationGuildCommands(clientId, "1281819287140434001"),
 			{ body: commands },
 		);
 
