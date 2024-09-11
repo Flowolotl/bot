@@ -30,7 +30,7 @@ export async function joinCall(
     client: Client,
 ) {
     checkConnectionAndPlayer()
-    let audioFile = path.join(__dirname, "assets/audio.mp3")
+    let audioFile = path.join(__dirname, "../assets/audio.mp3")
     let audioResource: AudioResource = createAudioResource(audioFile)
     Player = createAudioPlayer()
     Player.play(audioResource)
