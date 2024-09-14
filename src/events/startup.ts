@@ -42,16 +42,17 @@ export async function RolesMessage() {
 
     RolesChannel.messages.fetch().then((messages) => {
         let message
-        if (messages.size > 0) {
-            messages.last()?.edit(RolesMessageContent)
-            message = messages.last()
+        if (messages.size > 1) {
+            message = messages.get(messages.size - 1)
+            message.reactions.removeAll()
+            message.edit(RolesMessageContent)
         } else {
             RolesChannel.send(RolesMessageContent).then((sent_message) => {
                 message = sent_message
                 sent_message.react(":dart:")
                 sent_message.react(":alien:")
             }) 
-
         }
+        RoleMessageId = message.id
     })
 }
