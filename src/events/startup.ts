@@ -45,7 +45,7 @@ export async function RolesMessage() {
         if (messages.size > 1) {
             message = messages.get(messages.size - 1)
             // message.reactions.removeAll()
-            message.edit(RolesMessageContent)
+            // message?.edit(RolesMessageContent)
         } else {
             RolesChannel.send(RolesMessageContent).then((sent_message) => {
                 message = sent_message
