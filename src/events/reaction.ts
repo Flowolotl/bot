@@ -13,7 +13,8 @@ export async function Reaction(reaction: any, user: any) {
 
     console.log(user.username)
     console.log(reaction)
-    console.log(user.guild.roles.cache)
+    // console.log(user.guild.roles.cache)
+    console.log(reaction.emoji.name)
 
     if (reaction.emoji.name === "🎯") {
         if (user.member?.roles.cache.has("1284638359066513460")) {
