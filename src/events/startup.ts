@@ -46,14 +46,6 @@ export async function InfoMessage() {
     ) as GuildTextBasedChannel
 
     GetOrSendMessage(InfoChannel, 0, InfoMessageContent)
-
-    // InfoChannel.messages.fetch().then((messages) => {
-        // if (messages.size > 0) {
-            // messages.last()?.edit(InfoMessageContent)
-        // } else {
-            // InfoChannel.send(InfoMessageContent)
-        // }
-    // })
 }
 
 export let RoleMessageId = ""
