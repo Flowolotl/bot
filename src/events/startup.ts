@@ -17,19 +17,43 @@ export async function Startup() {
     console.log(`Logged in as ${client.user.tag}`)
 }
 
+async function GetMessage(channel: GuildTextBasedChannel, indexFromEnd: number) {
+    return await channel.messages.fetch().then((messages) => {
+        if (messages.size > indexFromEnd) {
+            let messageArray = Array.from(messages.values())
+            let message = messageArray[messageArray.length - indexFromEnd - 1]
+            return message
+        } else {
+            return null
+        }
+    })
+}
+
+async function GetOrSendMessage(channel: GuildTextBasedChannel, indexFromEnd: number, content: string) {
+    let message = await GetMessage(channel, indexFromEnd)
+
+    if (message === null) {
+        message = await channel.send(content)
+    }
+
+    return message
+}
+
 export async function InfoMessage() {
     const InfoChannelId = "1281826640028106752"
     const InfoChannel: GuildTextBasedChannel = client.channels.cache.get(
         InfoChannelId,
     ) as GuildTextBasedChannel
 
-    InfoChannel.messages.fetch().then((messages) => {
-        if (messages.size > 0) {
-            messages.last()?.edit(InfoMessageContent)
-        } else {
-            InfoChannel.send(InfoMessageContent)
-        }
-    })
+    GetOrSendMessage(InfoChannel, 0, InfoMessageContent)
+
+    // InfoChannel.messages.fetch().then((messages) => {
+        // if (messages.size > 0) {
+            // messages.last()?.edit(InfoMessageContent)
+        // } else {
+            // InfoChannel.send(InfoMessageContent)
+        // }
+    // })
 }
 
 export let RoleMessageId = ""
@@ -40,19 +64,13 @@ export async function RolesMessage() {
         RolesChannelId,
     ) as GuildTextBasedChannel
 
-    RolesChannel.messages.fetch().then((messages) => {
-        let message
-        if (messages.size > 1) {
-            message = messages.get(messages.size - 1)
-            // message.reactions.removeAll()
-            // message?.edit(RolesMessageContent)
-        } else {
-            RolesChannel.send(RolesMessageContent).then((sent_message) => {
-                message = sent_message
-                sent_message.react(":dart:")
-                sent_message.react(":alien:")
-            }) 
-        }
-        // RoleMessageId = message.id
-    })
+    let message = await GetOrSendMessage(RolesChannel, 1, RolesMessageContent)
+
+    message.reactions.removeAll()
+    message?.edit(RolesMessageContent)
+
+    message.react(":dart:")
+    message.react(":alien:")
+
+    RoleMessageId = message.id
 }
