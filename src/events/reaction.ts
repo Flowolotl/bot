@@ -11,6 +11,8 @@ export async function Reaction(reaction: any, user: any) {
         return
     }
 
+    console.log(user.name)
+
     if (reaction.emoji.name === "🎯") {
         if (user.member?.roles.cache.has("1284638359066513460")) {
            return 
