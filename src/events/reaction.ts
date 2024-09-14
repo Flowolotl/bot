@@ -1,11 +1,16 @@
 import { RoleMessageId } from "./startup"
-import { client } from "../index"
 
 export const events = {
-    Reaction: ["messageReactionAdd"],
+    ReactionAdd: ["messageReactionAdd"],
+    ReactionRemove: ["messageReactionRemove"],
 }
 
-export async function Reaction(reaction: any, user: any) {
+const Roles = {
+    "🎯": "Business",
+    "👽": "Funny Business",
+}
+
+export async function ReactionAdd(reaction: any, user: any) {
     if (user.bot) return
     
     if (reaction.message.id !== RoleMessageId) {
@@ -17,20 +22,21 @@ export async function Reaction(reaction: any, user: any) {
 
     let member = reaction.message.guild.members.cache.get(user.id)
 
-    if (reaction.emoji.name === "🎯") {
-        let flag = member.roles.cache.has("1284638359066513460")
-        console.log(flag)
-        if (flag) {
-           return 
+    for (let emoji in Roles) {
+        if (reaction.emoji.name === emoji) {
+            let role = reaction.message.guild.roles.cache.find((role) => role.name === Roles[emoji])
+            let flag = !member.roles.cache.has(role.id)
+            if (flag) {
+                member.roles.add(role)
+            }
         }
-
-        let role = reaction.message.guild.roles.cache.get("1284638359066513460")
-        member.roles.add(role)
     }
-    // else if (reaction.emoji.name === "👽") {
-        // if (user.id === reaction.message.author.id) {
-            // reaction.message.reactions.removeAll()
-            // reaction.message.edit("👽")
+
+    // if (reaction.emoji.name === "🎯") {
+        // let role = reaction.message.guild.roles.cache.find((role) => role.name === "Business")
+        // let flag = !member.roles.cache.has(role.id)
+        // if (flag) {
+            // member.roles.add(role)
         // }
     // }
 }
