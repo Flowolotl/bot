@@ -5,7 +5,7 @@ export const events = {
 }
 
 export async function Reaction(reaction: any, user: any) {
-    if (reaction.message.author.bot) return
+    if (user.bot) return
     
     if (reaction.message.id !== RoleMessageId) {
         return
