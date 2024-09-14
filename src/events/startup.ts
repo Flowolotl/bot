@@ -69,8 +69,8 @@ export async function RolesMessage() {
     message.reactions.removeAll()
     message?.edit(RolesMessageContent)
 
-    message.react(":dart:")
-    message.react(":alien:")
+    message.react("🎯")
+    message.react("👽")
 
     RoleMessageId = message.id
 }
