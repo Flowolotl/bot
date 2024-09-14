@@ -13,27 +13,20 @@ export async function Reaction(reaction: any, user: any) {
     }
 
     console.log(user.username)
-    // console.log(reaction)
-    // console.log(user.guild.roles.cache)
     console.log(reaction.emoji.name)
 
+    let member = reaction.message.guild.members.cache.get(user.id)
+
     if (reaction.emoji.name === "🎯") {
-        let flag = user.member?.roles.cache.has("1284638359066513460")
+        let flag = member.roles.cache.has("1284638359066513460")
         console.log(flag)
         if (flag) {
            return 
         }
 
         let role = reaction.message.guild.roles.cache.get("1284638359066513460")
-        console.log(role)
-        user.member?.roles.add(role)
+        member.roles.add(role)
     }
-    // if (reaction.emoji.name === "🎯") {
-        // if (user.id === reaction.message.author.id) {
-            // reaction.message.reactions.removeAll()
-            // reaction.message.edit("🎯")
-        // }
-    // }
     // else if (reaction.emoji.name === "👽") {
         // if (user.id === reaction.message.author.id) {
             // reaction.message.reactions.removeAll()
