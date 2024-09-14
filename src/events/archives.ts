@@ -26,7 +26,7 @@ export async function TrueArchives(message: Message) {
         ) as DMChannel
 
         trueArchives.send({
-            content: `${time(new Date())} **${message.author?.username}:** ${message.content}`,
+            content: `${time(new Date())} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
             files: attachments,
         })
     }
