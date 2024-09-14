@@ -6,6 +6,7 @@ import { client } from "../index"
 export const events = {
     Startup: ["ready"],
     InfoMessage: ["ready"],
+    RolesMessage: ["ready"],
 }
 
 export async function Startup() {
