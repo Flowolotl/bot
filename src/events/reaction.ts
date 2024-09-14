@@ -10,16 +10,16 @@ const Roles = {
     "👽": "Funny Business",
 }
 
+function ValidReaction(reaction: any, user: any) {
+    if (user.bot) return false
+    if (reaction.message.id !== RoleMessageId) return false
+
+    return true
+}
+
 export async function ReactionAdd(reaction: any, user: any) {
-    if (user.bot) return
+    if (!(ValidReaction(reaction, user))) return
     
-    if (reaction.message.id !== RoleMessageId) {
-        return
-    }
-
-    console.log(user.username)
-    console.log(reaction.emoji.name)
-
     let member = reaction.message.guild.members.cache.get(user.id)
 
     for (let emoji in Roles) {
@@ -39,4 +39,20 @@ export async function ReactionAdd(reaction: any, user: any) {
             // member.roles.add(role)
         // }
     // }
+}
+
+export async function ReactionRemove(reaction: any, user: any) {
+    if (!(ValidReaction(reaction, user))) return
+
+    let member = reaction.message.guild.members.cache.get(user.id)
+
+    for (let emoji in Roles) {
+        if (reaction.emoji.name === emoji) {
+            let role = reaction.message.guild.roles.cache.find((role) => role.name === Roles[emoji])
+            let flag = member.roles.cache.has(role.id)
+            if (flag) {
+                member.roles.remove(role)
+            }
+        }
+    }
 }
