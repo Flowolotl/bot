@@ -1,4 +1,5 @@
 import { RoleMessageId } from "./startup"
+import { client } from "../index"
 
 export const events = {
     Reaction: ["messageReactionAdd"],
@@ -12,16 +13,18 @@ export async function Reaction(reaction: any, user: any) {
     }
 
     console.log(user.username)
-    console.log(reaction)
+    // console.log(reaction)
     // console.log(user.guild.roles.cache)
     console.log(reaction.emoji.name)
+    console.log(reaction.emoji.name == "🎯")
+    console.log(reaction.emoji.name === "🎯")
 
     if (reaction.emoji.name === "🎯") {
         if (user.member?.roles.cache.has("1284638359066513460")) {
            return 
         }
 
-        user.member?.roles.add(user.guild.roles.cache.get("1284638359066513460"))
+        user.member?.roles.add(reaction.message.guild.roles.cache.get("1284638359066513460"))
     }
     // if (reaction.emoji.name === "🎯") {
         // if (user.id === reaction.message.author.id) {
