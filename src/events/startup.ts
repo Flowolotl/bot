@@ -66,7 +66,7 @@ export async function RolesMessage() {
 
     let message = await GetOrSendMessage(RolesChannel, 1, RolesMessageContent)
 
-    message.reactions.removeAll()
+    await message.reactions.removeAll()
     message?.edit(RolesMessageContent)
 
     message.react("🎯")
