@@ -44,7 +44,7 @@ export async function RolesMessage() {
         let message
         if (messages.size > 1) {
             message = messages.get(messages.size - 1)
-            message.reactions.removeAll()
+            // message.reactions.removeAll()
             message.edit(RolesMessageContent)
         } else {
             RolesChannel.send(RolesMessageContent).then((sent_message) => {
@@ -53,6 +53,6 @@ export async function RolesMessage() {
                 sent_message.react(":alien:")
             }) 
         }
-        RoleMessageId = message.id
+        // RoleMessageId = message.id
     })
 }
