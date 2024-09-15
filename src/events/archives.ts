@@ -1,4 +1,5 @@
 import { DMChannel, Message, time } from "discord.js"
+import { mainGuildId } from "../assets/config.json"
 
 export const events = {
     VastArchives: ["messageDelete"],
@@ -6,9 +7,7 @@ export const events = {
 }
 
 export async function TrueArchives(message: Message) {
-    const BingusDomainId = "1281819287140434001"
-
-    if (message.guildId === BingusDomainId) {
+    if (message.guildId === mainGuildId) {
         if (message.author.bot) return
 
         const TrueArchivesChannelId = "1281838930630807613"

@@ -1,5 +1,5 @@
 import { GuildTextBasedChannel } from "discord.js"
-import { InfoMessageContent, RolesMessageContent } from "../assets/config.json"
+import { InfoMessageContent, RolesMessageContent, mainGuildId } from "../assets/config.json"
 import { HandleCommands } from "../command-handler"
 import { client } from "../index"
 import { GetOrSendMessage } from "../class/messages"
@@ -55,7 +55,7 @@ export async function RolesMessage() {
 }
 
 export async function BingusMailingList() {
-    let guild = client.guilds.cache.get("1281819287140434001")
+    let guild = client.guilds.cache.get(mainGuildId)
     
     const BingusMailingRole = guild.roles.cache.find((role) => role.name === "Bingus Mailing List")
     const Users = guild.members.cache.filter((member) => (member.roles.cache.has(BingusMailingRole.id)))
