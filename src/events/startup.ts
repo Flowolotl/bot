@@ -11,6 +11,7 @@ export const events = {
     Startup: ["ready"],
     InfoMessage: ["ready"],
     RolesMessage: ["ready"],
+    BingusMailingList: ["ready"],
 }
 
 export async function Startup() {
@@ -51,4 +52,11 @@ export async function RolesMessage() {
     }
 
     RoleMessageId = message.id
+}
+
+export async function BingusMailingList() {
+    const Users = client.guild?.members.cache.filter((member) => member.roles.cache.find((role) => role.name === "Bingus Mailing List") !== undefined)
+    for (const user of Users) {
+        user.send(":alien:")
+    }
 }

@@ -8,6 +8,7 @@ export const events = {
 export const Roles = {
     "🎯": "Business",
     "👽": "Funny Business",
+    "📬": "Bingus Mailing List",
     "🐀": "Overwatch",
     "💉": "Titanfall",
     "⛏️": "Minecraft",
