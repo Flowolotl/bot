@@ -55,7 +55,11 @@ export async function RolesMessage() {
 }
 
 export async function BingusMailingList() {
-    const Users = client.guild?.members.cache.filter((member) => member.roles.cache.find((role) => role.name === "Bingus Mailing List"))
+    let guild = client.guild
+    
+    const BingusMailingRole = guild.roles.cache.find((role) => role.name === "Bingus Mailing List")
+    const Users = guild.members.cache.filter((member) => (member.roles.cache.has(BingusMailingRole.id)))
+
     for (const user of Users) {
         user.send(":alien:")
     }
