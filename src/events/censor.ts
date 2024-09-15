@@ -12,5 +12,5 @@ export async function CensorMessages(message: Message) {
     let clean = Clean(message.content)
 
     message.delete()
-    channel.send(`${message.author}: clean`)
+    channel.send(`${message.author}: ${clean}`)
 }
