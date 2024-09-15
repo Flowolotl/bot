@@ -14,7 +14,7 @@ export async function InsistNickname(
 ) {
     const member = newMember
 
-    if (member.id == "477590538233708566") return // bot doesn't have perms to change server owner nickname
+    if (!member.bannable) return // bot doesn't have perms to change server owner nickname 
 
     let nicksData: any
     try {

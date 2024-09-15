@@ -6,8 +6,6 @@ export const events = {
 }
 
 export async function TrueArchives(message: Message) {
-    // because not all servers have archives
-
     const BingusDomainId = "1281819287140434001"
 
     if (message.guildId === BingusDomainId) {
@@ -44,7 +42,7 @@ export async function VastArchives(message: Message) {
 
     if (message.channelId == VastArchivesChannelId) {
         message.channel.send({
-            content: `## **${message.author?.username}:** ${message.content}`,
+            content: `${time(new Date())}## **${message.author?.username}:** ${message.content}`,
             files: attachments,
         })
     }

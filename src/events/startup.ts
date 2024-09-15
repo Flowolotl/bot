@@ -2,6 +2,10 @@ import { GuildTextBasedChannel } from "discord.js"
 import { InfoMessageContent, RolesMessageContent } from "../assets/config.json"
 import { HandleCommands } from "../command-handler"
 import { client } from "../index"
+import { GetOrSendMessage } from "../class/messages"
+import { Roles } from "./reaction"
+
+export let RoleMessageId = ""
 
 export const events = {
     Startup: ["ready"],
@@ -17,28 +21,6 @@ export async function Startup() {
     console.log(`Logged in as ${client.user.tag}`)
 }
 
-async function GetMessage(channel: GuildTextBasedChannel, indexFromEnd: number) {
-    return await channel.messages.fetch().then((messages) => {
-        if (messages.size > indexFromEnd) {
-            let messageArray = Array.from(messages.values())
-            let message = messageArray[messageArray.length - indexFromEnd - 1]
-            return message
-        } else {
-            return null
-        }
-    })
-}
-
-async function GetOrSendMessage(channel: GuildTextBasedChannel, indexFromEnd: number, content: string) {
-    let message = await GetMessage(channel, indexFromEnd)
-
-    if (message === null) {
-        message = await channel.send(content)
-    }
-
-    return message
-}
-
 export async function InfoMessage() {
     const InfoChannelId = "1281826640028106752"
     const InfoChannel: GuildTextBasedChannel = client.channels.cache.get(
@@ -48,21 +30,25 @@ export async function InfoMessage() {
     GetOrSendMessage(InfoChannel, 0, InfoMessageContent)
 }
 
-export let RoleMessageId = ""
-
 export async function RolesMessage() {
     const RolesChannelId = "1281826640028106752"
     const RolesChannel: GuildTextBasedChannel = client.channels.cache.get(
         RolesChannelId,
     ) as GuildTextBasedChannel
 
-    let message = await GetOrSendMessage(RolesChannel, 1, RolesMessageContent)
+    let content = RolesMessageContent
+    for (const role of Object.keys(Roles)) {
+        content += `\n ${role} -> ${Roles[role]} `
+    }
+
+    let message = await GetOrSendMessage(RolesChannel, 1, content)
 
     await message.reactions.removeAll()
     message?.edit(RolesMessageContent)
 
-    message.react("🎯")
-    message.react("👽")
+    for (const role of Object.keys(Roles)) {
+        message.react(role)
+    }
 
     RoleMessageId = message.id
 }

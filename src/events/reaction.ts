@@ -5,7 +5,7 @@ export const events = {
     ReactionRemove: ["messageReactionRemove"],
 }
 
-const Roles = {
+export const Roles = {
     "🎯": "Business",
     "👽": "Funny Business",
 }
@@ -31,14 +31,6 @@ export async function ReactionAdd(reaction: any, user: any) {
             }
         }
     }
-
-    // if (reaction.emoji.name === "🎯") {
-        // let role = reaction.message.guild.roles.cache.find((role) => role.name === "Business")
-        // let flag = !member.roles.cache.has(role.id)
-        // if (flag) {
-            // member.roles.add(role)
-        // }
-    // }
 }
 
 export async function ReactionRemove(reaction: any, user: any) {
