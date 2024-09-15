@@ -19,6 +19,15 @@ export async function Startup() {
     await HandleCommands(client)
 
     console.log(`Logged in as ${client.user.tag}`)
+
+    let newroles = ["Overwatch", "Titanfall", "Minecraft", "Terraria", "Pokemon", "Goose Duck", "Rounds", "Lethal", "Artist", "Nerd"]
+
+    for (const role_name of newroles) {
+        let guild = client.guilds.cache.get("1281819287140434001")
+        let role = guild?.roles.create({
+            name: role_name,
+        })
+    }
 }
 
 export async function InfoMessage() {
