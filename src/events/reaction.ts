@@ -1,3 +1,4 @@
+import { GuildMember } from "discord.js"
 import { RoleMessageId } from "./startup"
 
 export const events = {
@@ -17,7 +18,7 @@ export const Roles = {
     "🪿": "Goose Duck",
     "🟠": "Rounds",
     "💰": "Lethal",
-    "🎨": "Artist"
+    "🎨": "Artist",
 }
 
 function ValidReaction(reaction: any, user: any) {
@@ -28,13 +29,15 @@ function ValidReaction(reaction: any, user: any) {
 }
 
 export async function ReactionAdd(reaction: any, user: any) {
-    if (!(ValidReaction(reaction, user))) return
-    
+    if (!ValidReaction(reaction, user)) return
+
     let member = reaction.message.guild.members.cache.get(user.id)
 
     for (let emoji in Roles) {
         if (reaction.emoji.name === emoji) {
-            let role = reaction.message.guild.roles.cache.find((role) => role.name === Roles[emoji])
+            let role = reaction.message.guild.roles.cache.find(
+                (role) => role.name === Roles[emoji],
+            )
             let flag = !member.roles.cache.has(role.id)
             if (flag) {
                 member.roles.add(role)
@@ -44,13 +47,15 @@ export async function ReactionAdd(reaction: any, user: any) {
 }
 
 export async function ReactionRemove(reaction: any, user: any) {
-    if (!(ValidReaction(reaction, user))) return
+    if (!ValidReaction(reaction, user)) return
 
-    let member = reaction.message.guild.members.cache.get(user.id)
+    let member: GuildMember = reaction.message.guild.members.cache.get(user.id)
 
     for (let emoji in Roles) {
         if (reaction.emoji.name === emoji) {
-            let role = reaction.message.guild.roles.cache.find((role) => role.name === Roles[emoji])
+            let role = reaction.message.guild.roles.cache.find(
+                (role) => role.name === Roles[emoji],
+            )
             let flag = member.roles.cache.has(role.id)
             if (flag) {
                 member.roles.remove(role)

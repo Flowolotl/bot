@@ -1,8 +1,13 @@
 import { GuildTextBasedChannel } from "discord.js"
-import { InfoMessageContent, RolesMessageContent, mainGuildId } from "../assets/config.json"
+import {
+    InfoMessageContent,
+    RolesMessageContent,
+    mainGuildId,
+} from "../assets/config.json"
+import { Safe } from "../class/censor"
+import { GetOrSendMessage } from "../class/messages"
 import { HandleCommands } from "../command-handler"
 import { client } from "../index"
-import { GetOrSendMessage } from "../class/messages"
 import { Roles } from "./reaction"
 
 export let RoleMessageId = ""
@@ -20,6 +25,7 @@ export async function Startup() {
     await HandleCommands(client)
 
     console.log(`Logged in as ${client.user.tag}`)
+    Safe("arse")
 }
 
 export async function InfoMessage() {
@@ -41,7 +47,7 @@ export async function RolesMessage() {
     for (const role of Object.keys(Roles)) {
         content += `\n ${role} -> ${Roles[role]} `
     }
-    
+
     let message = await GetOrSendMessage(RolesChannel, 1, content)
 
     await message.reactions.removeAll()
@@ -56,9 +62,13 @@ export async function RolesMessage() {
 
 export async function BingusMailingList() {
     let guild = client.guilds.cache.get(mainGuildId)
-    
-    const BingusMailingRole = guild.roles.cache.find((role) => role.name === "Bingus Mailing List")
-    const Users = guild.members.cache.filter((member) => (member.roles.cache.has(BingusMailingRole.id)))
+
+    const BingusMailingRole = guild.roles.cache.find(
+        (role) => role.name === "Bingus Mailing List",
+    )
+    const Users = guild.members.cache.filter((member) =>
+        member.roles.cache.has(BingusMailingRole.id),
+    )
 
     for (const user of Users) {
         user[1].user.send(":alien:")
