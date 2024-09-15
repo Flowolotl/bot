@@ -63,7 +63,7 @@ export function Clean(str: string): string {
             let length = term.length
 
             let section1 = returnString.substring(0, foundIndex)
-            let replacement = "_".repeat(length)
+            let replacement = "-".repeat(length)
             let section2 = returnString.substring(
                 foundIndex + length,
                 returnString.length,
