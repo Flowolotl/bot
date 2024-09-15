@@ -55,7 +55,7 @@ export async function RolesMessage() {
 }
 
 export async function BingusMailingList() {
-    let guild = client.guild
+    let guild = client.guilds.cache.get("1281819287140434001")
     
     const BingusMailingRole = guild.roles.cache.find((role) => role.name === "Bingus Mailing List")
     const Users = guild.members.cache.filter((member) => (member.roles.cache.has(BingusMailingRole.id)))
