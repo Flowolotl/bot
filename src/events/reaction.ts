@@ -8,6 +8,15 @@ export const events = {
 export const Roles = {
     "🎯": "Business",
     "👽": "Funny Business",
+    "🐀": "Overwatch",
+    "💉": "Titanfall",
+    "⛏️": "Minecraft",
+    "💀": "Terraria",
+    "🐱": "Pokemon",
+    "🪿": "Goose Duck",
+    "🟠": "Rounds",
+    "💰": "Lethal",
+    "🎨": "Artist"
 }
 
 function ValidReaction(reaction: any, user: any) {
