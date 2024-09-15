@@ -1,4 +1,4 @@
-import { GuildMember } from "discord.js"
+import { GuildMember, Role } from "discord.js"
 import { RoleMessageId } from "./startup"
 
 export const events = {
@@ -36,7 +36,7 @@ export async function ReactionAdd(reaction: any, user: any) {
     for (let emoji in Roles) {
         if (reaction.emoji.name === emoji) {
             let role = reaction.message.guild.roles.cache.find(
-                (role) => role.name === Roles[emoji],
+                (role: Role) => role.name === Roles[emoji],
             )
             let flag = !member.roles.cache.has(role.id)
             if (flag) {
@@ -54,7 +54,7 @@ export async function ReactionRemove(reaction: any, user: any) {
     for (let emoji in Roles) {
         if (reaction.emoji.name === emoji) {
             let role = reaction.message.guild.roles.cache.find(
-                (role) => role.name === Roles[emoji],
+                (role: Role) => role.name === Roles[emoji],
             )
             let flag = member.roles.cache.has(role.id)
             if (flag) {

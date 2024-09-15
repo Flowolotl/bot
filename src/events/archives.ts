@@ -1,5 +1,6 @@
 import { DMChannel, Message, time } from "discord.js"
 import { mainGuildId } from "../assets/config.json"
+import { isSafe } from "../class/Censor"
 
 export const events = {
     VastArchives: ["messageDelete"],
@@ -31,6 +32,7 @@ export async function TrueArchives(message: Message) {
 
 export async function VastArchives(message: Message) {
     if (message.author?.bot) return
+    if (!isSafe(message.content)) return
 
     const VastArchivesChannelId = "1281827815309967360"
 

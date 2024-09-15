@@ -4,7 +4,6 @@ import {
     RolesMessageContent,
     mainGuildId,
 } from "../assets/config.json"
-import { Safe } from "../class/censor"
 import { GetOrSendMessage } from "../class/messages"
 import { HandleCommands } from "../command-handler"
 import { client } from "../index"
@@ -25,7 +24,6 @@ export async function Startup() {
     await HandleCommands(client)
 
     console.log(`Logged in as ${client.user.tag}`)
-    Safe("arse")
 }
 
 export async function InfoMessage() {
