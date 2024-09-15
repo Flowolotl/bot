@@ -1,5 +1,5 @@
 import { Message } from "discord.js"
-import { Clean, isSafe } from "../class/Censor"
+import { Clean, isSafe } from "../class/censor.ts"
 
 export const events = {
     CensorMessages: ["messageCreate"],

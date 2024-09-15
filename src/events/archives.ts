@@ -1,6 +1,6 @@
 import { DMChannel, Message, time } from "discord.js"
 import { mainGuildId } from "../assets/config.json"
-import { isSafe } from "../class/Censor"
+import { isSafe } from "../class/censor.ts"
 
 export const events = {
     VastArchives: ["messageDelete"],
