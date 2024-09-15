@@ -62,6 +62,6 @@ export async function BingusMailingList() {
 
     for (const user of Users) {
         // client.users.send(user.id, ":alien:")
-        console.log(user)
+        console.log(user.user)
     }
 }
