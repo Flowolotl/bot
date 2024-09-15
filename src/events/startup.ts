@@ -61,6 +61,6 @@ export async function BingusMailingList() {
     const Users = guild.members.cache.filter((member) => (member.roles.cache.has(BingusMailingRole.id)))
 
     for (const user of Users) {
-        client.users.send(user.user.id, ":alien:")
+        client.users.send(user.id, ":alien:")
     }
 }
