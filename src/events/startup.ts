@@ -40,7 +40,7 @@ export async function RolesMessage() {
     for (const role of Object.keys(Roles)) {
         content += `\n ${role} -> ${Roles[role]} `
     }
-
+    console.log(content)
     let message = await GetOrSendMessage(RolesChannel, 1, content)
 
     await message.reactions.removeAll()
