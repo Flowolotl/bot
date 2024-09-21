@@ -13,12 +13,11 @@ export const Roles = {
     "🐀": "Overwatch",
     "💉": "Titanfall",
     "⛏️": "Minecraft",
-    "💀": "Terraria",
-    "🐱": "Pokemon",
     "🪿": "Goose Duck",
     "🟠": "Rounds",
     "💰": "Lethal",
     "🎨": "Artist",
+    "🤓": "Physics Addiction",
 }
 
 function ValidReaction(reaction: any, user: any) {
