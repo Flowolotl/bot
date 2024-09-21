@@ -43,7 +43,7 @@ export async function VastArchives(message: Message) {
 
     if (message.channelId == VastArchivesChannelId) {
         message.channel.send({
-            content: `${time(new Date())}## **${message.author?.username}:** ${message.content}`,
+            content: `${time(new Date())} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
             files: attachments,
         })
     }
