@@ -4,9 +4,10 @@ import { FirstIndex } from "../class/generic.ts"
 
 export const events = {
     CensorMessages: ["messageCreate"],
+    CensorEdits: ["messageUpdate"],
 }
 
-export async function CensorMessages(message: Message) {
+async function Common(message: Message, annotation: string) {
     if (message.author.bot) return
     if (isSafe(message.content)) return
     if (
@@ -20,5 +21,20 @@ export async function CensorMessages(message: Message) {
     let clean = Clean(message.content)
 
     message.delete()
-    channel.send(`${message.author}: ${clean}`)
+
+    let content: string
+    if (annotation != "") {
+        content = `${message.author} ${annotation}: ${clean}`
+    } else {
+        content = `${message.author}: ${clean}`
+    }
+    channel.send(content)
+}
+
+export async function CensorEdits(_oldMessage: Message, newMessage: Message) {
+    Common(newMessage, "[edit]")
+}
+
+export async function CensorMessages(message: Message) {
+    Common(message, "")
 }
