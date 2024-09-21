@@ -38,7 +38,8 @@ export async function InfoMessage() {
         InfoChannelId,
     ) as GuildTextBasedChannel
 
-    GetOrSendMessage(InfoChannel, 0, InfoMessageContent)
+    let message = await GetOrSendMessage(InfoChannel, 0, InfoMessageContent)
+    message?.edit(InfoMessageContent)
 }
 
 export async function RolesMessage() {
