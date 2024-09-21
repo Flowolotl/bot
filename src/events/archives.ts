@@ -27,14 +27,14 @@ export async function MessageUpdate(oldMessage: Message, newMessage: Message) {
                 TrueArchivesChannelId,
             ) as DMChannel
             trueArchives.send({
-                content: `${time(new Date(message.createdTimestamp))} [${message.channel.name}] [edit] **${message.author?.username}:** ${newMessage.content}`,
+                content: `${time(message.createdAt)} [${message.channel.name}] [edit] **${message.author?.username}:** ${newMessage.content}`,
                 files: attachments,
             })
         } else {
             message.delete()
 
             message.channel.send({
-                content: `${time(new Date(message.createdTimestamp))} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
+                content: `${time(message.createdAt)} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
                 files: attachments,
             })
         }
