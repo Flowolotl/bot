@@ -20,7 +20,7 @@ export function isSafe(str: string): boolean {
                         .toLowerCase()
                         .search(
                             new RegExp(String.raw`${ok.toLowerCase()}`, "g"),
-                        )
+                        ) > -1
                 ) {
                     skip = true
                 }
