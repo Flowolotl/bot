@@ -1,7 +1,7 @@
 import { GuildTextBasedChannel } from "discord.js"
 import {
-    InfoMessageContent,
-    RolesMessageContent,
+    //InfoMessageContent,
+    //RolesMessageContent,
     mainGuildId,
 } from "../assets/config.json"
 import { GetOrSendMessage } from "../class/messages"
@@ -10,6 +10,12 @@ import { client } from "../index"
 import { Roles } from "./reaction"
 
 export let RoleMessageId = ""
+
+export const InfoMessageContent =
+    "# Guidelines\n## Use __Taxes__ for school related topics\n-# <#1281827710078947328> <#1281845492292259971> <#1281827609168056330>\n## Use __Commune__ for everything else\n-# <#1281826528522534932> <#1281845668654088274> <#1281819287669047471> <#1284666675156877342>\n\n# Rules\n## Racism is bad. Therefore, Bingus does not like it and will ~~kill~~ mute you.\n## Rhythm games are a banned topic in any discussion."
+
+export const RolesMessageContent =
+    "# Roles\n## React with one of the corresponding emoji to get a role.\n-# Note that Funny/Business gives access to different channels.\n\n 🎯 -> Business \n 👽 -> Funny Business \n 🐀 -> Overwatch \n 💉 -> Titanfall \n ⛏️ -> Minecraft \n 💀 -> Terraria \n 🐱 -> Pokemon \n 🪿 -> Goose Duck \n 🟠 -> Rounds \n 💰 -> Lethal \n 🎨 -> Artist"
 
 export const events = {
     Startup: ["ready"],
