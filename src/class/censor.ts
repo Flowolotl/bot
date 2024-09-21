@@ -6,10 +6,26 @@ interface Censor {
     foundTerms: string[]
 }
 
+const whitelist = ["document", "cucumber"]
+
 export function isSafe(str: string): boolean {
     for (let word of words) {
-        if (FirstIndex(word, str) > -1) {
-            return false
+        let firstIndex = FirstIndex(word, str)
+        if (firstIndex > -1) {
+            let skip = false
+            for (let ok of whitelist) {
+                if (
+                    str
+                        .slice(firstIndex - 4, firstIndex + 8)
+                        .toLowerCase()
+                        .search(
+                            new RegExp(String.raw`${ok.toLowerCase()}`, "g"),
+                        )
+                ) {
+                    skip = true
+                }
+            }
+            return skip
         }
     }
     return true
