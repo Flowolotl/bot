@@ -14,14 +14,12 @@ export function isSafe(str: string): boolean {
         if (firstIndex > -1) {
             let skip = false
             for (let ok of whitelist) {
-                if (
-                    str
-                        .slice(firstIndex - 4, firstIndex + 8)
-                        .toLowerCase()
-                        .search(
-                            new RegExp(String.raw`${ok.toLowerCase()}`, "g"),
-                        ) > -1
-                ) {
+                let surroundingString = str
+                    .slice(Math.max(firstIndex - 4, 0), firstIndex + 8)
+                    .toLowerCase()
+                let okRegex = new RegExp(String.raw`${ok.toLowerCase()}`, "g")
+                let whitelistIndex = surroundingString.search(okRegex)
+                if (whitelistIndex > -1) {
                     skip = true
                 }
             }
@@ -91,3 +89,8 @@ export function Clean(str: string): string {
 
     return returnString
 }
+
+let test1 = isSafe("document")
+console.log(test1)
+let test2 = Clean("document")
+console.log(test2)
