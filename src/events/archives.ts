@@ -17,6 +17,7 @@ export async function MessageUpdate(oldMessage: Message, newMessage: Message) {
     let message = oldMessage
     if (message.guildId === mainGuildId) {
         if (message.author.bot) return
+        if (oldMessage.id !== newMessage.id) return
 
         let attachments = []
         message.attachments.each(async (attachment) => {

@@ -14,7 +14,6 @@ export const Roles = {
     "💉": "Titanfall",
     "⛏️": "Minecraft",
     "🪿": "Goose Duck",
-    "🟠": "Rounds",
     "💰": "Lethal",
     "🎨": "Artist",
     "🤓": "Physics Addiction",
