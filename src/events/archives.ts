@@ -34,12 +34,17 @@ export async function MessageUpdate(oldMessage: Message, newMessage: Message) {
             })
         } else {
             ignore.push(message.id as never)
-            message.delete()
+            //message.delete()
 
-            message.channel.send({
-                content: `${time(message.createdAt)} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
+            newMessage.reply({
+                content: `${time(message.createdAt)} [${message.channel.name}] [before edit] **${message.author?.username}:** ${message.content}`,
                 files: attachments,
             })
+
+            //message.channel.send({
+            //content: `${time(message.createdAt)} [${message.channel.name}] [edit] **${message.author?.username}:** ${message.content}`,
+            //files: attachments,
+            //})
         }
     }
 }
