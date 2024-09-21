@@ -11,6 +11,8 @@ export const events = {
 const TrueArchivesChannelId = "1281838930630807613"
 const VastArchivesChannelId = "1281827815309967360"
 
+let ignore = []
+
 export async function MessageUpdate(oldMessage: Message, newMessage: Message) {
     let message = oldMessage
     if (message.guildId === mainGuildId) {
@@ -31,6 +33,7 @@ export async function MessageUpdate(oldMessage: Message, newMessage: Message) {
                 files: attachments,
             })
         } else {
+            ignore.push(message.id as never)
             message.delete()
 
             message.channel.send({
@@ -42,6 +45,10 @@ export async function MessageUpdate(oldMessage: Message, newMessage: Message) {
 }
 
 export async function TrueArchives(message: Message) {
+    if (message.id in ignore) {
+        ignore.splice(ignore.indexOf(message.id as never))
+        return
+    }
     if (message.guildId === mainGuildId) {
         if (message.author.bot) return
 
@@ -56,13 +63,17 @@ export async function TrueArchives(message: Message) {
         ) as DMChannel
 
         trueArchives.send({
-            content: `${time(message.createdTimestamp)} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
+            content: `${time(message.createdAt)} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
             files: attachments,
         })
     }
 }
 
 export async function VastArchives(message: Message) {
+    if (message.id in ignore) {
+        ignore.splice(ignore.indexOf(message.id as never))
+        return
+    }
     if (message.author?.bot) return
     if (!isSafe(message.content)) return
 
@@ -73,7 +84,7 @@ export async function VastArchives(message: Message) {
 
     if (message.channelId == VastArchivesChannelId) {
         message.channel.send({
-            content: `${time(message.createdTimestamp)} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
+            content: `${time(message.createdAt)} [${message.channel.name}] **${message.author?.username}:** ${message.content}`,
             files: attachments,
         })
     }
