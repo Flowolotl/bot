@@ -14,7 +14,7 @@ export async function Bint(oldMember: VoiceState, newMember: VoiceState) {
         newMember.member?.user.bot === false
     ) {
         let rand = Math.round(Math.random() * 100)
-        if (rand < 25) {
+        if (rand < 5) {
             joinCall(newMember.channelId, guild.id, client)
         }
     }
