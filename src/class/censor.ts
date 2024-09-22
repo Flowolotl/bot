@@ -6,7 +6,7 @@ interface Censor {
     foundTerms: string[]
 }
 
-const whitelist = ["document", "cucumber", "night"]
+const whitelist = ["document", "cucumber", "night", "titan", "titanfall"]
 
 export function isSafe(str: string): boolean {
     for (let word of words) {
