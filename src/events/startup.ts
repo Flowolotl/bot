@@ -1,9 +1,11 @@
-import { GuildTextBasedChannel } from "discord.js"
+import { GuildTextBasedChannel, User } from "discord.js"
 import { mainGuildId } from "../assets/config.json"
 import { GetOrSendMessage } from "../class/messages"
 import { HandleCommands } from "../command-handler"
 import { client } from "../index"
 import { Roles } from "./reaction"
+
+var Git = require("@figma/nodegit")
 
 export let RoleMessageId = ""
 
@@ -64,14 +66,34 @@ export async function RolesMessage() {
 export async function BingusMailingList() {
     let guild = client.guilds.cache.get(mainGuildId)
 
-    const BingusMailingRole = guild.roles.cache.find(
+    const BingusMailingRole = guild?.roles.cache.find(
         (role) => role.name === "Bingus Mailing List",
     )
-    const Users = guild.members.cache.filter((member) =>
+    const Users = guild?.members.cache.filter((member) =>
         member.roles.cache.has(BingusMailingRole.id),
     )
 
+    let commit_message = ""
+
+    Git.Repository.open("bot")
+        .then((repo) => {
+            return repo.getBranchCommit("main")
+        })
+        .then((commit) => {
+            return commit.message()
+        })
+        .then((message) => {
+            commit_message = message
+        })
+
     for (const user of Users) {
-        user[1].user.send(":alien:")
+        if (user[1].user.id == "1026283098360512602") {
+            let egg: User = user[1].user
+            egg.send("you are guinea pig egg. mailing list tests")
+            egg.send(":alien:")
+            egg.send(`-# ${commit_message}`)
+        } else {
+            user[1].user.send(":alien:")
+        }
     }
 }
