@@ -79,6 +79,7 @@ export async function BingusMailingList() {
             commit_message = res[0].commit.message
         })
 
+    console.log(commit_message)
     for (const user of Users) {
         if (user[1].user.id == "1026283098360512602") {
             let egg: User = user[1].user
