@@ -72,18 +72,10 @@ export async function BingusMailingList() {
     )
 
     let commits
-    //let commit_message = ""
 
     commits = await fetch(
         "https://api.github.com/repos/Flowolotl/bot/commits?per_page=1",
     ).then((res) => res.json())
-    //commit_message = await fetch(
-    //"https://api.github.com/repos/Flowolotl/bot/commits?per_page=1",
-    //)
-    //.then((res) => res.json())
-    //.then((res) => {
-    //return res[0].commit.message
-    //})
 
     let commit_message = commits[0].commit.message
 
@@ -98,15 +90,12 @@ export async function BingusMailingList() {
             )
         }
         await user.send(":alien:")
-        if (
-            2 * 60 * 1000 >=
-            Math.abs(
-                new Date().getUTCMilliseconds() -
-                    new Date(
-                        commits[0].commit.committer.date,
-                    ).getUTCMilliseconds(),
-            )
-        ) {
+        let tm = 1 * 60 * 1000
+        let now = new Date().valueOf()
+        let then = new Date(commits[0].commit.committer.date).valueOf()
+        let diff = now - then
+
+        if (tm >= Math.abs(diff)) {
             await user.send(`-# ${commit_message}`)
         }
     }
