@@ -85,6 +85,8 @@ export async function BingusMailingList() {
             egg.send("you are guinea pig egg. mailing list tests")
             egg.send(":alien:")
             egg.send(`-# ${commit_message}`)
+        } else if (user[1].user.id == "477590538233708566") {
+            user[1].user.send(`-# ${commit_message}`)
         } else {
             user[1].user.send(":alien:")
         }
