@@ -5,10 +5,6 @@ import { HandleCommands } from "../command-handler"
 import { client } from "../index"
 import { Roles } from "./reaction"
 
-var Git = require("@figma/nodegit")
-
-export let RoleMessageId = ""
-
 export const InfoMessageContent =
     "# Guidelines\n## Use __Taxes__ for school related topics\n-# <#1281827710078947328> <#1281845492292259971> <#1281827609168056330>\n## Use __Commune__ for everything else\n-# <#1281826528522534932> <#1281845668654088274> <#1281819287669047471> <#1284666675156877342>\n\n# Rules\n## Racism is bad. Therefore, Bingus does not like it and might kill you.\n## To your best ability, don't be dumb."
 
@@ -75,15 +71,10 @@ export async function BingusMailingList() {
 
     let commit_message = ""
 
-    Git.Repository.open("bot")
-        .then((repo) => {
-            return repo.getBranchCommit("main")
-        })
-        .then((commit) => {
-            return commit.message()
-        })
-        .then((message) => {
-            commit_message = message
+    fetch("https://api.github.com/repos/Flowolotl/bot/commits?per_page=1")
+        .then((res) => res.json())
+        .then((res) => {
+            commit_message = res[0].commit.message
         })
 
     for (const user of Users) {

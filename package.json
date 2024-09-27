@@ -11,7 +11,6 @@
   "description": "",
   "dependencies": {
     "@discordjs/voice": "^0.17.0",
-    "@figma/nodegit": "^0.28.0-figma.6",
     "discord.js": "^14.15.3",
     "libsodium-wrappers": "^0.7.15",
     "openai": "^4.56.0"
