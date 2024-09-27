@@ -1,4 +1,4 @@
-import { GuildTextBasedChannel, User } from "discord.js"
+import { GuildMember, GuildTextBasedChannel, User } from "discord.js"
 import { mainGuildId } from "../assets/config.json"
 import { GetOrSendMessage } from "../class/messages"
 import { HandleCommands } from "../command-handler"
@@ -82,16 +82,19 @@ export async function BingusMailingList() {
             return res[0].commit.message
         })
 
-    for (const user of Users) {
-        if (user[1].user.id == "1026283098360512602") {
-            let egg: User = user[1].user
-            egg.send("you are guinea pig egg. mailing list tests")
-            egg.send(":alien:")
-            egg.send(`-# ${commit_message}`)
-        } else if (user[1].user.id == "477590538233708566") {
-            user[1].user.send(`-# ${commit_message}`)
+    console.log(commit_message)
+    for (const gm of Users) {
+        let member: GuildMember = gm[1]
+        let user: User = member.user
+
+        if (user.username == "egg879") {
+            user.send("you are guinea pig egg. mailing list tests")
+            user.send(":alien:")
+            user.send(`-# ${commit_message}`)
+        } else if (user.username == "flowolotl") {
+            user.send(`-# ${commit_message}`)
         } else {
-            user[1].user.send(":alien:")
+            user.send(":alien:")
         }
     }
 }
