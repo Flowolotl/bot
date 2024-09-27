@@ -71,15 +71,21 @@ export async function BingusMailingList() {
         member.roles.cache.has(BingusMailingRole.id),
     )
 
-    let commit_message = ""
+    let commits
+    //let commit_message = ""
 
-    commit_message = await fetch(
+    commits = await fetch(
         "https://api.github.com/repos/Flowolotl/bot/commits?per_page=1",
-    )
-        .then((res) => res.json())
-        .then((res) => {
-            return res[0].commit.message
-        })
+    ).then((res) => res.json())
+    //commit_message = await fetch(
+    //"https://api.github.com/repos/Flowolotl/bot/commits?per_page=1",
+    //)
+    //.then((res) => res.json())
+    //.then((res) => {
+    //return res[0].commit.message
+    //})
+
+    let commit_message = commits[0].commit.message
 
     console.log(commit_message)
     for (const gm of Users) {
@@ -92,6 +98,16 @@ export async function BingusMailingList() {
             )
         }
         await user.send(":alien:")
-        await user.send(`-# ${commit_message}`)
+        if (
+            2 * 60 * 1000 >=
+            Math.abs(
+                new Date().getUTCMilliseconds() -
+                    new Date(
+                        commits[0].commit.committer.date,
+                    ).getUTCMilliseconds(),
+            )
+        ) {
+            await user.send(`-# ${commit_message}`)
+        }
     }
 }
