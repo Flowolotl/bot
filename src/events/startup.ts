@@ -87,11 +87,8 @@ export async function BingusMailingList() {
         let user: User = member.user
 
         if (user.username == "egg879") {
-            user.send(`-# ${commit_message}`)
-        } else if (user.username == "flowolotl") {
-            user.send(`-# ${commit_message}`)
-        } else {
-            user.send(":alien:")
         }
+        user.send(`-# ${commit_message}`)
+        user.send(":alien:")
     }
 }
