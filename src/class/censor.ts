@@ -89,8 +89,3 @@ export function Clean(str: string): string {
 
     return returnString
 }
-
-let test1 = isSafe("document")
-console.log(test1)
-let test2 = Clean("document")
-console.log(test2)
