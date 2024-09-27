@@ -87,11 +87,11 @@ export async function BingusMailingList() {
         let user: User = member.user
 
         if (user.username == "egg879") {
-            user.send(
+            await user.send(
                 "https://tenor.com/view/bingus-bingus-combat-gif-24367941",
             )
         }
-        user.send(":alien:")
-        user.send(`-# ${commit_message}`)
+        await user.send(":alien:")
+        await user.send(`-# ${commit_message}`)
     }
 }
